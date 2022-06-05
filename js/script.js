@@ -20,3 +20,22 @@ $("#hour10 .description").val(localStorage.getItem("hour10"))
 $("#hour11 .description").val(localStorage.getItem("hour11"))
 $("#hour12 .description").val(localStorage.getItem("hour12"))
 $("#hour13 .description").val(localStorage.getItem("hour13"))
+
+function schedule() {
+    var currentTime = moment().hour()
+    var blockHour = $(this).attr("id")
+
+    console.log(blockHour, currentTime)
+
+    if (blockHour < currentTime) {
+        $(this).addClass("past")
+    }
+
+    else if (blockHour === currentTime) {
+        $(this).addClass("present")
+    }
+
+    else {
+        $(this).addClass("future")
+    }
+}
