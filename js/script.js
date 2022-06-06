@@ -1,16 +1,17 @@
 // load page with current date
 $(document).ready(function () {
 
+    // display current time using moment js
     $("#currentDay").text(moment().format("MMMM DD YYYY, h:mm:ss a")); 
     $(".saveBtn").on("click", function () {
-    
-        console.log(this);
-        var text = $(this).children("description").val(); 
-        var time = $(this).parent().attr("id"); 
-        
-        
+
+        var text = $(this).siblings(".description").val(); 
+        var time = $(this).parent().attr("id");       
+       
         localStorage.setItem(time, text);
     })})
+
+    // pull stored data from local storage
 
 $("#hour6 .description").val(localStorage.getItem("hour6"))
 $("#hour7 .description").val(localStorage.getItem("hour7"))
@@ -21,21 +22,26 @@ $("#hour11 .description").val(localStorage.getItem("hour11"))
 $("#hour12 .description").val(localStorage.getItem("hour12"))
 $("#hour13 .description").val(localStorage.getItem("hour13"))
 
+// show schedule in different color
+
 function schedule() {
     var currentTime = moment().hour()
-    var blockHour = $(this).attr("id")
+    var blockTime = $(this).attr("id")
 
-    console.log(blockHour, currentTime)
+    console.log(blockTime, currentTime)
 
-    if (blockHour < currentTime) {
+    if (blockTime < currentTime) {
         $(this).addClass("past")
     }
 
-    else if (blockHour === currentTime) {
+    else if (blockTime === currentTime) {
         $(this).addClass("present")
     }
 
     else {
         $(this).addClass("future")
     }
+    schedule();
 }
+
+
