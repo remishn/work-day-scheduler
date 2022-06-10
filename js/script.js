@@ -23,25 +23,30 @@ $("#hour12 .description").val(localStorage.getItem("hour12"))
 $("#hour13 .description").val(localStorage.getItem("hour13"))
 
 // show schedule in different color
+schedule()
+setInterval(schedule, 10000)
 
 function schedule() {
     var currentTime = moment().hour()
-    var blockTime = $(this).attr("id")
+    var blockTimeEls = $(".time-block")
+    for(var i = 0; i < blockTimeEls.length; i++ ) {
+        var blockTimeEl = blockTimeEls[i]
+        var blockTime = blockTimeEl.dataset.hour
 
-    console.log(blockTime, currentTime)
-
-    if (blockTime < currentTime) {
-        $(this).addClass("past")
-    }
-
-    else if (blockTime === currentTime) {
-        $(this).addClass("present")
-    }
-
-    else {
-        $(this).addClass("future")
-    }
-    schedule();
+        if (blockTime < currentTime) {
+            $(blockTimeEl).children().eq(1).addClass("past")
+        }
+    
+        else if (blockTime == currentTime) {
+            $(blockTimeEl).children().eq(1).addClass("present")
+        }
+    
+        else {
+            $(blockTimeEl).children().eq(1).addClass("future")
+        }
+    } 
 }
+    
 
+   
 
